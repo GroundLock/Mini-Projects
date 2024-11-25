@@ -7,10 +7,10 @@ def add_item():
 
 def complete_task():
     taks_to_be_completed = int(input("Insert the number of the task you want to be completed:  "))
-    if taks_to_be_completed > len(to_do_list) or taks_to_be_completed < len(to_do_list):
-        print("Number not valid")
-    else:
+    try:
         to_do_list.remove(to_do_list[taks_to_be_completed-1])
+    except:
+        print("an error in deleting the item has occured")
 
 def show_to_do_list():
     counter = 0
@@ -20,7 +20,8 @@ def show_to_do_list():
 
 while True:
     if counter == 0:
-        add_item
+        add_item()
+        counter += 1
     else:
         show_to_do_list
         choice = input("")
@@ -29,7 +30,7 @@ while True:
         elif choice == "complete.item":
             complete_task()
         elif choice == "show.list":
-            show_to_do_list
+            show_to_do_list()
         elif choice == "quit":
             exit()
         else:
