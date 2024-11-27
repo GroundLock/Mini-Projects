@@ -8,7 +8,7 @@ def add_item():
 def complete_task():
     taks_to_be_completed = int(input("Insert the number of the task you want to be completed:  "))
     try:
-        to_do_list.remove(to_do_list[taks_to_be_completed-1])
+        to_do_list.pop(to_do_list[taks_to_be_completed-1])
     except:
         print("an error in deleting the item has occured")
 
