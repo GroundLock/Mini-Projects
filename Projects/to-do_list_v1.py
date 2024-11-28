@@ -6,9 +6,9 @@ def add_item():
     to_do_list.append(item_to_be_added)
 
 def complete_task():
-    taks_to_be_completed = int(input("Insert the number of the task you want to be completed:  "))
+    taks_to_be_completed = int(input("Insert the number of the task you want to be completed: "))
     try:
-        to_do_list.pop(to_do_list[taks_to_be_completed-1])
+        to_do_list.pop(taks_to_be_completed-1)
     except:
         print("an error in deleting the item has occured")
 
@@ -24,14 +24,14 @@ while True:
         counter += 1
     else:
         show_to_do_list
-        choice = input("")
-        if choice == "add.item":
+        choice = input(">")
+        if choice == "list.add":
             add_item()
-        elif choice == "complete.item":
+        elif choice == "list.complete":
             complete_task()
-        elif choice == "show.list":
+        elif choice == "list.show":
             show_to_do_list()
-        elif choice == "quit":
-            exit()
+        elif choice == "list.quit":
+            break
         else:
             print("not a valid command")
