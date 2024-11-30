@@ -1,23 +1,35 @@
-to_do_list = []
+from datetime import date
+to_do_list = {
+    "ID" : [] ,
+    "Description" : [] ,
+    "Status" : [] ,
+    "CreatedAt" : [] ,
+    "UpdatedAt" : []
+}
+
+id_counter = 0
 counter = 0
 
 def add_item():
     item_to_be_added = input("Enter the item you want to be added to the list: ")
-    to_do_list.append(item_to_be_added)
+    to_do_list["ID"].append(id_counter)
+    to_do_list["Description"].append(item_to_be_added)
+    to_do_list['Status'].append("todo")
+    to_do_list['CreatedAt'].append(date.today())
 
 def complete_task():
     taks_to_be_completed = int(input("Insert the number of the task you want to be completed: "))
     try:
-        to_do_list.pop(taks_to_be_completed-1)
+        to_do_list.update({"Status" : "Done"})
+        to_do_list.update({"UpdatedAt" : date.today()})
     except:
         print("an error in deleting the item has occured")
 
 def show_to_do_list():
     counter = 0
-    for item in to_do_list:
-        counter += 1
-        print(f"{counter}. {item}")
+    print(to_do_list)
 
+    
 while True:
     if counter == 0:
         add_item()
