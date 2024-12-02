@@ -1,15 +1,22 @@
 from datetime import date
+import json
 
-to_do_list = {
+try:
+    with open("data.json") as f:
+        to_do_list =  json.load(f)
+        id_counter = len(to_do_list["ID"])
+except:
+    to_do_list = {
     "ID" : [] ,
     "Description" : [] ,
     "Status" : [] ,
     "CreatedAt" : [] ,
     "UpdatedAt" : []
 }
+    id_counter = 0
 
-id_counter = 0
 counter = 0
+today = str(date.today())
 
 def add_item():
     global id_counter
@@ -18,8 +25,8 @@ def add_item():
     to_do_list["ID"]+=[id_counter]
     to_do_list["Description"]+=[item_to_be_added]
     to_do_list['Status']+=["todo"]
-    to_do_list['CreatedAt']+=[date.today()]
-    to_do_list["UpdatedAt"]+=[date.today()]
+    to_do_list['CreatedAt']+=[today]
+    to_do_list["UpdatedAt"]+=[today]
 
 
 def update_status():
@@ -44,13 +51,13 @@ def update_status():
             to_do_list["Status"][which_task-1] = "In Progress"
         elif option == 2:
             to_do_list["Status"][which_task-1] = "Done"
-        to_do_list["UpdatedAt"][which_task-1] = date.today()
+        to_do_list["UpdatedAt"][which_task-1] = today
     else:
         print("Not Valid")
     
 
 def show_to_do_list():
-    #Function to show the dictionary, pretty way of doing it but could't think on other way of doing
+    #Function to show the dictionary, pretty bad way of doing it but could't think on other way of doing
     for n in range(len(to_do_list["ID"])):
         print(f'''ID: {to_do_list["ID"][n]}
                 Task: {to_do_list["Description"][n]}
@@ -61,19 +68,17 @@ def show_to_do_list():
     
 
 while True:
-    if counter == 0:
+    show_to_do_list
+    choice = input(">")
+    if choice == "add":
         add_item()
-        counter += 1
+    elif choice == "update":
+        update_status()
+    elif choice == "show":
+        show_to_do_list()
+    elif choice == "quit":
+        with open("data.json","w") as f:
+            json.dump(to_do_list, f, indent=2)
+        break
     else:
-        show_to_do_list
-        choice = input(">")
-        if choice == "add":
-            add_item()
-        elif choice == "update":
-            update_status()
-        elif choice == "show":
-            show_to_do_list()
-        elif choice == "quit":
-            break
-        else:
-            print("not a valid command")
+        print("not a valid command")
