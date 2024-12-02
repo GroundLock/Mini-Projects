@@ -38,6 +38,15 @@ def update_status():
                     Last updated at {to_do_list["UpdatedAt"][n]}
                 --------------------------------------''')
         update_counter+=1
+    option = int(input("update to:\n 1. In progress\n 2. Done\n>"))
+    if option == 1 or option == 2:
+        if option == 1:
+            to_do_list["Status"][which_task-1] = "In Progress"
+        elif option == 2:
+            to_do_list["Status"][which_task-1] = "Done"
+        to_do_list["UpdatedAt"][which_task-1] = date.today()
+    else:
+        print("Not Valid")
     
 
 def show_to_do_list():
