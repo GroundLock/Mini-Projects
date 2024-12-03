@@ -62,6 +62,21 @@ def show_to_do_list():
                         Last updated at {to_do_list[n]["UpdatedAt"]}
                 --------------------------------------''')
     
+def show_some(stat):
+    if stat == 1:
+        show = "todo"
+    elif stat == 2:
+        show = "In Progress"
+    elif stat == 3:
+        show = "Done"
+    for item in to_do_list:
+        if item["Status"] == show:
+            print(f'''ID: {item["ID"]}
+                    Task: {item["Description"]}
+                    Status: {item["Status"]}
+                    Created at {item["CreatedAt"]}
+                    Last updated at {item["UpdatedAt"]}
+                --------------------------------------''')
 
 while True:
     show_to_do_list
@@ -72,6 +87,12 @@ while True:
         update_status()
     elif choice == "show":
         show_to_do_list()
+    elif choice == "show.todo":
+        show_some(1)
+    elif choice == "show.inp":
+        show_some(2)
+    elif choice == "show.done":
+        show_some(3)
     elif choice == "quit":
         with open("data.json","w") as f:
             json.dump(to_do_list, f, indent=2)
