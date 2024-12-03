@@ -31,25 +31,24 @@ def update_status():
         print("Not valid")
         return
     #I'm tired so I'm going to do the lame way :)
-    update_counter = 0
-    for n in range(len(to_do_list)):
-        if update_counter == which_task-1:
-            print(f'''ID: {to_do_list[n]["ID"]}
-                    Task: {to_do_list[n]["Description"]}
-                    Status: {to_do_list[n]["Status"]}
-                    Created at {to_do_list[n]["CreatedAt"]}
-                    Last updated at {to_do_list[n]["UpdatedAt"]}
+    for item in to_do_list:
+        if item["ID"] == which_task:
+            print(f'''ID: {item["ID"]}
+                    Task: {item["Description"]}
+                    Status: {item["Status"]}
+                    Created at {item["CreatedAt"]}
+                    Last updated at {item["UpdatedAt"]}
                 --------------------------------------''')
-        update_counter+=1
-    option = int(input("update to:\n 1. In progress\n 2. Done\n>"))
-    if option == 1 or option == 2:
-        if option == 1:
-            to_do_list[which_task-1]["Status"] = "In Progress"
-        elif option == 2:
-            to_do_list[which_task-1]["Status"] = "Done"
-        to_do_list[which_task-1]["UpdatedAt"] = today
-    else:
-        print("Not Valid")
+            option = int(input("update to:\n 1. In progress\n 2. Done\n>"))
+            if option == 1 or option == 2:
+                if option == 1:
+                    item["Status"] = "In Progress"
+                elif option == 2:
+                    item["Status"] = "Done"
+                item["UpdatedAt"] = today
+            else:
+                print("Not Valid")
+            break
     
 
 def show_to_do_list():
@@ -77,6 +76,9 @@ def show_some(stat):
                     Created at {item["CreatedAt"]}
                     Last updated at {item["UpdatedAt"]}
                 --------------------------------------''')
+
+def delete():
+    pass
 
 while True:
     show_to_do_list
