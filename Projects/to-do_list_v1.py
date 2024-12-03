@@ -81,7 +81,6 @@ def delete():
     pass
 
 while True:
-    show_to_do_list
     choice = input(">")
     if choice == "add":
         add_item()
