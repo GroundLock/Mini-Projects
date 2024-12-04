@@ -50,7 +50,7 @@ def update_status():
             else:
                 print("Not Valid")
             break
-            protective_counter += 1
+        protective_counter += 1
         if protective_counter > len(to_do_list):
             print("Couldnt find the id")
     
