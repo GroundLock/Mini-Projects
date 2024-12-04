@@ -26,8 +26,9 @@ def add_item():
 
 
 def update_status():
+    protective_counter = 0
     which_task = int(input("ID of the task to be updated \n>"))
-    if which_task > len(to_do_list) or which_task <= 0:
+    if which_task <= 0:
         print("Not valid")
         return
     #I'm tired so I'm going to do the lame way :)
@@ -49,6 +50,9 @@ def update_status():
             else:
                 print("Not Valid")
             break
+            protective_counter += 1
+        if protective_counter > len(to_do_list):
+            print("Couldnt find the id")
     
 
 def show_to_do_list():
@@ -78,8 +82,26 @@ def show_some(stat):
                 --------------------------------------''')
 
 def delete():
-    pass
-
+    id_to_delete = int(input("Enter the ID of the task you want to delete:"))
+    protective_counter = 0
+    if id_to_delete <= 0:
+        print("not valid")
+        return
+    for item in to_do_list:
+        if item["ID"] == id_to_delete:
+            print(f'''ID: {item["ID"]}
+                    Task: {item["Description"]}
+                    Status: {item["Status"]}
+                    Created at {item["CreatedAt"]}
+                    Last updated at {item["UpdatedAt"]}
+                --------------------------------------''')
+            last_chance = str(input("Type 'yes' if you're really sure you want to delete it: "))
+            if last_chance == "yes":
+                to_do_list.remove(item)
+                return
+        protective_counter += 1
+        if protective_counter > len(to_do_list):
+            print("Couldnt find the ID")
 while True:
     choice = input(">")
     if choice == "add":
@@ -94,6 +116,8 @@ while True:
         show_some(2)
     elif choice == "show.done":
         show_some(3)
+    elif choice == "del":
+        delete()
     elif choice == "quit":
         with open("data.json","w") as f:
             json.dump(to_do_list, f, indent=2)
